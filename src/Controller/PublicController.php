@@ -73,6 +73,22 @@ class PublicController extends AbstractController
         return new JsonResponse("error, wrong format", 200, [], false);
     }
 
+    // Model Section
+
+    /**
+     * @Route("/public/model/{id_brand}", name="public_model")
+     */
+    public function modelByBrand(Request $request, $id_brand, SerializerInterface $serializer, BrandRepository $brandRepository)
+    {
+        // get all models of a brand
+        if ($request->isMethod("get")) {
+            $models = $brandRepository->findOneBy(['id' => $id_brand])->getModels();
+            $data = $serializer->serialize($models, 'json');
+            return new JsonResponse($data, 200, [], true);
+        }
+        return new JsonResponse("error, wrong format", 200, [], false);
+    }
+
     // Fuel Section
 
     /**
