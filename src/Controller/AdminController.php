@@ -23,8 +23,12 @@ class AdminController extends AbstractController
      * @param Request $request
      * @Route("/admin/pro", name="admin_pros")
      */
-    public function professionals(Request $request, SerializerInterface $serializer, ProfessionalRepository $professionalRepository, UserRepository $userRepository)
-    {
+    public function professionals(
+        Request $request,
+        SerializerInterface $serializer,
+        ProfessionalRepository $professionalRepository,
+        UserRepository $userRepository
+    ) {
         // get all pros
         if ($request->isMethod("get")) {
             $pros = $this->getDoctrine()->getRepository(Professional::class)->findAll();
